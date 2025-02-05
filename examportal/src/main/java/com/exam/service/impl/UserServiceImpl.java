@@ -3,6 +3,7 @@ package com.exam.service.impl;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.exam.entity.User;
 import com.exam.entity.UserRole;
@@ -10,6 +11,7 @@ import com.exam.repo.RoleRepository;
 import com.exam.repo.UserRepository;
 import com.exam.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -39,6 +41,18 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return local;
+	}
+	
+//	get user by username
+	@Override
+	public User getUser(String username) {
+		return this.userRepository.findByUsername(username);
+	}
+
+	@Override
+	public void deleteUser(Long userId) {
+		this.userRepository.deleteById(userId);
+		
 	}
 
 }
