@@ -4,6 +4,8 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideClientHydration(withEventReplay()), 
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()) // ✅ Enable Fetch API
+    provideHttpClient(withFetch()), // ✅ Enable Fetch API
+    MatSnackBarModule
   ]
 };

@@ -8,14 +8,19 @@
                 <h3 class="text-center">Register Here</h3>
                 <!-- {{user | json}} -->
                 <form (ngSubmit)="formSubmit()">
+                    <!-- username field -->
                     <mat-form-field appearance="fill" class="full-width">
                         <mat-label>Username</mat-label>
                         <input 
                             [(ngModel)]="user.username"
                             name = "username"
-                            required type="text" matInput placeholder="Enter your username ">
+                            required 
+                            type="text" matInput placeholder="Enter your username ">
+                            <!-- <mat-hint class="error-hint">Username must be unique</mat-hint> Hint added here -->
+                            <mat-error>Username must be unique</mat-error>
                     </mat-form-field>
 
+                    <!-- firstname field -->
                     <mat-form-field appearance="fill" class="full-width">
                         <mat-label>FirstName</mat-label>
                         <input 
@@ -24,6 +29,7 @@
                             required type="text" matInput placeholder="Enter your FirstName ">
                     </mat-form-field>
 
+                    <!-- lastname field -->
                     <mat-form-field appearance="fill" class="full-width">
                         <mat-label>LastName</mat-label>
                         <input 
@@ -32,6 +38,7 @@
                             required type="text" matInput placeholder="Enter your LastName ">
                     </mat-form-field>
 
+                    <!-- email field -->
                     <mat-form-field appearance="fill" class="full-width">
                         <mat-label>Email</mat-label>
                         <input 
@@ -40,6 +47,7 @@
                             required type="email" matInput placeholder="Enter your Email ">
                     </mat-form-field>
 
+                    <!-- password field -->
                     <mat-form-field appearance="fill" class="full-width">
                         <mat-label>Password</mat-label>
                         <input 
@@ -48,6 +56,7 @@
                             required type="password" matInput placeholder="Enter your Password ">
                     </mat-form-field>
 
+                    <!-- phone field -->
                     <mat-form-field appearance="fill" class="full-width">
                         <mat-label>Phone</mat-label>
                         <input 
