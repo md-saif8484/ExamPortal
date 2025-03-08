@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center" style="background-color: cadetblue;margin-top: 5px;">
+                <div class="container" style="margin-top: 20px;">
+                    <img style="width: 300px; height: 200px;" src="../../../assets/login.jpg.jpg" alt="">
+                </div>
+                <h1>Login here</h1>
+                <!-- {{loginData | json}} -->
+                <form (ngSubmit)="formSubmit()">
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Username</mat-label>
+                        <input 
+                            [(ngModel)]="loginData.username"
+                            name = "username"
+                            name = "username"
+                            required 
+                            type="text" matInput placeholder="Enter your username " />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input 
+                            [(ngModel)]="loginData.password"
+                            name="password"
+                            name = "password"
+                            required 
+                            type="password" matInput placeholder="Enter your password " />
+                    </mat-form-field>
+
+                    <div class="container" style="margin-bottom: 2px;">
+                        <button mat-raised-button>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

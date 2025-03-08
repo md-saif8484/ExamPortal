@@ -1,0 +1,13 @@
+.example-spacer {
+    flex-grow: 1; /* Allow this spacer to take up available space */
+  }
+
+  mat-toolbar {
+    width: 100%;  /* Make the toolbar take the full width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: cadetblue; /* Change background color */
+    color: white;
+    padding: 0 16px;
+  }

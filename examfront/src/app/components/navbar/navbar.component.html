@@ -1,1 +1,11 @@
-<h1>This is navbar</h1>
+<mat-toolbar ngSkipHydration>
+    <button mat-icon-button 
+      routerLink="/">
+      <mat-icon>menu_book</mat-icon>
+    </button>
+    <span>ExamPortal</span>
+    <span class="example-spacer"></span> 
+    <button mat-button routerLink="/login" style="margin-right: 20px;color: white;">Login</button>
+   <button mat-button  routerLink="/signup" style="margin-left: 10px;color: white;">Register</button>
+</mat-toolbar>
+  

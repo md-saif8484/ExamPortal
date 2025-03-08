@@ -3,8 +3,13 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { authInterceptorProviders } from './services/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,7 +18,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideClientHydration(withEventReplay()), 
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()), // ✅ Enable Fetch API
-    MatSnackBarModule
+    provideHttpClient(withInterceptorsFromDi()),
+    MatSnackBarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    authInterceptorProviders, 
   ]
 };

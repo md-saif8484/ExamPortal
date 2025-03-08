@@ -30,6 +30,10 @@ public class UserController {
 	@PostMapping("/")
 	public User createUser(@RequestBody User user) throws Exception
 	{
+		System.out.println("Received User: " + user);
+		if (user.getUsername() == null || user.getUsername().isEmpty()) {
+	        throw new Exception("Username is required");
+	    }
 		user.setProfile("default.png");
 		Set<UserRole> roles = new HashSet<>();
 		Role role = new Role();
@@ -44,12 +48,14 @@ public class UserController {
 		return this.userService.createUser(user, roles);
 	}
 	
+//	fetching user
 	@GetMapping("/{username}")
 	public User getUser(@PathVariable("username") String username)
 	{
 		return this.userService.getUser(username);
 	}
 	
+//	deleteing user
 	@DeleteMapping("/{userId}")
 	public void deleteUser(@PathVariable("userId") Long userId)
 	{
