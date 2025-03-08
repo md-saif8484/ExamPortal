@@ -4,6 +4,8 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { normalGuard } from './services/normal.guard';
+import { adminGuard } from './services/admin.guard';
 
 export const routes: Routes = [
     {
@@ -25,10 +27,12 @@ export const routes: Routes = [
         path:'admin',
         component:DashboardComponent,
         pathMatch:'full',
+        canActivate:[adminGuard],
     },
     {
         path:'user-dashboard',
         component:UserDashboardComponent,
         pathMatch:'full',
+        canActivate:[normalGuard],
     },
 ];
