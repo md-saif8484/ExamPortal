@@ -7,11 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe, CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../../services/login.service';
-import { error } from 'console';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [MatButtonModule,MatFormFieldModule,MatInputModule,MatSnackBarModule,FormsModule,JsonPipe,CommonModule],
+  imports: [MatButtonModule,MatFormFieldModule,MatInputModule,MatSnackBarModule,FormsModule,JsonPipe,CommonModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -20,7 +20,7 @@ export class LoginComponent {
       username:"",
       password:"",
     }
-    constructor(private snack:MatSnackBar,private login:LoginService) {}
+    constructor(private snack:MatSnackBar,private login:LoginService,private router:Router) {}
     formSubmit()
     {
       console.log("login button clicked");
@@ -43,30 +43,35 @@ export class LoginComponent {
       // request server to generate token
       this.login.generateToken(this.loginData).subscribe(
         (data:any) => {
-          console.log("success");
+          console.log("success::inside login component");
           console.log(data);
 
           // login
           this.login.tokenStore(data.token);
-
+          console.log("token ==:", this.login.getToken());
           this.login.getCurrentUser().subscribe(
             (user:any)=> {
+              console.log("User received after login:", user);
               this.login.setUser(user);
               console.log(user);
+              console.log("User stored successfully.");
 
               // redirect .. dashboard
               // console.log(this.login.getUserRole());
-              if(this.login.getUserRole()=="Admin")
-              {
-                console.log(this.login.getUserRole());
-                window.location.href = '/admin';
-              }else if(this.login.getUserRole()=="Normal")
-              {
-                console.log(this.login.getUserRole());
-                window.location.href = '/user-dashboard';
-              }else{
-                this.login.logout();
-              }
+              setTimeout(() => {
+                if(this.login.getUserRole()=="Admin")
+                  {
+                    console.log(this.login.getUserRole());
+                    this.router.navigate(['/admin']);
+                  }else if(this.login.getUserRole()=="Normal")
+                  {
+                    console.log(this.login.getUserRole());
+                    this.router.navigate(['/user-dashboard']);
+                  }else{
+                    this.login.logout();
+                  }
+              },500);
+              
             }
           );
 

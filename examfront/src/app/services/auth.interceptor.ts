@@ -18,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor
                 setHeaders:{Authorization:`Bearer ${token}`}
             });
         }
+        console.log("laving interceptor",authReq);
         return next.handle(authReq);
     }
 }

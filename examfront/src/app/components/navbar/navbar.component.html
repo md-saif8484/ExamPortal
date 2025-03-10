@@ -5,7 +5,27 @@
     </button>
     <span>ExamPortal</span>
     <span class="example-spacer"></span> 
-    <button mat-button routerLink="/login" style="margin-right: 20px;color: white;">Login</button>
-   <button mat-button  routerLink="/signup" style="margin-left: 10px;color: white;">Register</button>
+
+    <button 
+    *ngIf="!isLoggedIn"
+      mat-button routerLink="/login" 
+      style="margin-right: 20px;color: white;">
+        Login</button>
+
+   <button mat-button 
+   *ngIf="!isLoggedIn"
+    routerLink="/signup" style="margin-left: 10px;color: white;">
+      Register</button>
+
+    <button mat-button 
+    (click)= "logout()"
+    *ngIf="isLoggedIn"
+      routerLink="/login" style="margin-left: 10px;color: white;">
+        Logout</button> 
+        
+        <button mat-button 
+        *ngIf="isLoggedIn"
+          style="margin-left: 10px;color: white;">
+            {{username}}</button> 
 </mat-toolbar>
   
