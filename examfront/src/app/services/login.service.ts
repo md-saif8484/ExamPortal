@@ -11,7 +11,19 @@ export class LoginService {
   private loginStatus = new BehaviorSubject<boolean>(this.isTokenAvailable());
   private userSubject = new BehaviorSubject<any>(this.getUser());
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.updateLoginStatus();
+  }
+
+  // Call this function in constructor to prevent flickering
+private updateLoginStatus() {
+  const token = this.getToken();
+  if (token) {
+    this.loginStatus.next(true);
+  } else {
+    this.loginStatus.next(false);
+  }
+}
 
   // ✅ Get the current login status as an observable
   public getLoginStatus() {

@@ -6,6 +6,8 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { normalGuard } from './services/normal.guard';
 import { adminGuard } from './services/admin.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 
 export const routes: Routes = [
     {
@@ -26,8 +28,20 @@ export const routes: Routes = [
     {
         path:'admin',
         component:DashboardComponent,
-        pathMatch:'full',
+        // pathMatch:'full',
         canActivate:[adminGuard],
+        children:[
+            {
+                path:'',
+                component:WelcomeComponent,
+                // pathMatch:'full',
+            },
+            {
+                path:'profile',
+                component:ProfileComponent,
+                // pathMatch:'full',
+            }
+        ],
     },
     {
         path:'user-dashboard',

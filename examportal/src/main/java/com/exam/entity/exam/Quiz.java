@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +34,7 @@ public class Quiz {
 	private Category category;
 	
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "quiz")
+	@JsonIgnore
 	private Set<Question> questions = new HashSet<>();
 
 	public Quiz(String title, String description, String maxMarks, String numberOfQuestions, boolean active) {
@@ -102,6 +105,14 @@ public class Quiz {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Set<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
 	}
 	
 	

@@ -16,6 +16,8 @@ public class Question {
 	@Column(length = 5000)
 	private String content;
 	private String image;
+	
+
 	private String option1;
 	private String option2;
 	private String option3;
@@ -95,5 +97,11 @@ public class Question {
 		this.quiz = quiz;
 	}
 	
-	
+	public Long getQuesId() {
+		return quesId;
+	}
+
+	public void setQuesId(Long quesId) {
+		this.quesId = quesId;
+	}
 }
