@@ -1,0 +1,45 @@
+<h1 class="text-center" >Questions of {{qtitle}} </h1>
+
+<mat-card class="mt10" style="background-color: rgb(233, 237, 229);" *ngFor="let c of questions; let i = index">
+    <mat-card-content class="ml20">
+        <div class="custom">
+            <p><b>Question {{ i + 1 }}: </b></p>
+            <p> {{ c.content }}</p>
+        </div>
+        
+
+        <div>
+            <p><b>A)</b> {{ c.option1 }}</p>
+            <p><b>B)</b> {{ c.option2 }}</p>
+            <p><b>C)</b> {{ c.option3 }}</p>
+            <p><b>D)</b> {{ c.option4 }}</p>
+        </div>
+
+        <div>
+            <p><b>Correct Answer:</b> {{ c.answer }}</p>
+        </div>
+        <div class="text-center">
+            <button 
+                mat-raised-button 
+                (click)="deleteQuestion(c.quesId)"
+                style="background-color: rgb(35, 112, 122);color: white;">Delete
+            </button>
+            <button 
+                mat-raised-button class="ml10" 
+                [routerLink]="['/admin/update-question',c.quesId,qid,qtitle]"
+                style="background-color: rgb(35, 112, 122);color: white;">Update
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div class="mt20 text-center">
+    <button 
+        [routerLink]="['/admin/add-questions',qid,qtitle]"
+        mat-raised-button 
+        style="background-color: rgb(35, 112, 122); color: white;">
+        Add Questions
+    </button>
+</div>
+
+

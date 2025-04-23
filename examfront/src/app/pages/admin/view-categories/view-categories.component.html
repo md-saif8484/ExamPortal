@@ -1,0 +1,17 @@
+<div><h1 style="margin-left: 20px;">All Category</h1></div>
+<mat-card class="example-card" appearance="outlined" *ngFor="let c of categories">
+        
+    <div class="custom-header">
+        <mat-icon class="title-icon">category</mat-icon>
+        <mat-card-title>{{ c.title }}</mat-card-title>
+      </div>
+    
+    <mat-card-content>
+        <p>{{ c.description }}</p>
+    </mat-card-content>
+    
+  </mat-card>
+
+<div class="container text-center" style="margin-top: 20px;">
+    <button mat-raised-button style="background-color: rgb(35, 112, 122); color: white;" routerLink="/admin/addcategory">Add Category</button>
+</div>

@@ -1,0 +1,61 @@
+<div><h1 class="text-center">Quizzes</h1></div>
+<mat-card class="example-card" appearance="outlined" *ngFor="let c of quiz">
+    <!-- <div class="custom"> -->
+        <div class="custom-header">
+            <div class="testing">
+                <div class="custom-header">
+                    <mat-icon class="title-icon">quiz</mat-icon>
+                    <mat-card-title>{{ c.title | uppercase }}</mat-card-title>
+                </div>
+                <div>
+                    <mat-card-content class="ml20">
+                        <p>{{ c.category.title | uppercase }}</p>
+                    </mat-card-content>
+                </div>
+            </div>
+            <div>
+                <button mat-raised-button class="ml10" style="border: 2px solid rgb(35, 112, 122); color: black;">maxMarks: {{c.maxMarks}}</button>
+                <button mat-raised-button class="ml10" style="border: 2px solid rgb(35, 112, 122); color: black;">numOfQues: {{c.numberOfQuestions}}</button>
+            </div>
+        </div>
+        
+    
+    
+    
+    <div class="container mt10">
+        <button mat-raised-button 
+            [routerLink]="['/admin/view-questions', c.qId,c.title]"
+            class="ml10 btn" 
+            >Question
+        </button>
+        <button 
+            [routerLink]="['/admin/add-questions',c.qId,c.title]"
+            mat-raised-button class="ml10 btn" 
+            >Add Question
+        </button>
+        
+        <button mat-raised-button class="ml10 btn" 
+            (click)="deletequiz(c.qId)"
+            >Delete
+        </button>
+        <button mat-raised-button class="ml10 btn" 
+        [routerLink]="['/admin/quiz', c.qId]"
+                >Update
+        </button>
+        <button mat-raised-button class="ml10" 
+            [ngStyle]="{'background-color': c.active ? 'green' : 'red', 'color': 'white'}">
+            {{ c.active ? 'Active' : 'Inactive' }}
+        </button>
+    </div>
+    
+    
+  </mat-card>
+
+  <div class="text-center">
+    <button mat-raised-button 
+        class="ml10" class=" mt20" 
+        routerLink="/admin/addquiz"
+        style="background-color: rgb(35, 112, 122); color: white;">Add New Quiz
+    </button>
+  </div>
+

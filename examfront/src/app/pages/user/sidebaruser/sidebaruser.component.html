@@ -1,0 +1,32 @@
+<mat-card style="background-color: rgb(233, 237, 229);">
+    <mat-action-list>
+      <div class="container text-center">
+        <h3 style="font-weight: bold;font-size: large;">Menu</h3>
+        <hr>
+      </div>
+      <div class="container text-center">
+            <button mat-list-item routerLink="/user-dashboard/0">
+                
+                <mat-icon mat-list-icon>home</mat-icon> All Quizzes
+            </button>
+            <button mat-list-item style="margin-top: 20px;" >
+                <mat-icon mat-list-icon>account_circle</mat-icon> Profile
+            </button>
+
+            <button 
+                [routerLink]="['/user-dashboard',category.id]"
+                *ngFor="let category of categories" mat-list-item style="margin-top: 20px;">
+                <mat-icon mat-list-icon>category</mat-icon> {{ category.title | uppercase }}
+             </button>
+            
+            <button 
+            (click)= "logout()"    
+                mat-list-item style="margin-top: 20px;" >
+                <mat-icon mat-list-icon>logout</mat-icon> Logout
+            </button>
+
+      </div>
+      
+    </mat-action-list>
+  </mat-card>
+  

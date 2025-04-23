@@ -1,0 +1,11 @@
+.shadow-text {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: underline;
+}
+
+.custom {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}

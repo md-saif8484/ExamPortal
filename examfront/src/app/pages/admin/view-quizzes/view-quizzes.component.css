@@ -1,0 +1,28 @@
+.custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px; /* Adds space between icon and title */
+    padding: 10px;
+    background-color: #528883; 
+    color: white;
+    font-weight: bold;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .custom {
+    background-color: #528883; 
+    color: white;
+  }
+
+  .btn {
+    background-color: rgb(35, 112, 122);
+    color: white;
+  }
+
+  .testing {
+    display: flex;
+    flex-direction: column;
+}
+
+  

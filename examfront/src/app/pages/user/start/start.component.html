@@ -1,0 +1,92 @@
+<div class="bootstrap-wrapper" *ngIf="!isSubmit">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <h1>Instructions</h1>
+            </div>
+            <div class="col-md-8">
+                <!-- This section will only display when questions are present -->
+                <ng-container *ngIf="questions && questions[0]?.quiz">
+                    <h1>Ongoing Quiz <b>{{questions[0]?.quiz.title}}</b></h1>
+                </ng-container>
+
+                <mat-card *ngFor="let q of questions;let i = index" class="mb20">
+                    <mat-card-content>
+                        <p> <b>Q{{i+1}})</b>    <span class="ml10 semi-bold" [innerHTML]="q.content"></span></p>
+                        
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+
+                    <div class="row" >
+                        <div class="col-md-6 mt10" >
+                            <input 
+                                [(ngModel)] = "q.givenAnswer"
+                                type="radio" [value]="q.option1" [name]="'question' + i" />
+                            {{q.option1}}
+                        </div>
+                        <div class="col-md-6 mt10">
+                            <input 
+                                [(ngModel)] = "q.givenAnswer"
+                                type="radio" [value]="q.option2" [name]="'question' + i"/>
+                            {{q.option2}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mt10">
+                            <input 
+                                [(ngModel)] = "q.givenAnswer"
+                                type="radio" [value]="q.option3" [name]="'question' + i"/>
+                            {{q.option3}}
+                        </div>
+                        <div class="col-md-6 mt10">
+                            <input 
+                                [(ngModel)] = "q.givenAnswer"
+                                type="radio" [value]="q.option4" [name]="'question' + i"/>
+                            {{q.option4}}
+                        </div>
+                    </div>
+
+                </mat-card>
+
+                <div class="container text-center mt20">
+                    <button (click)="submitQuiz()" mat-raised-button color="primary">Submit</button>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <h1>Time Remaining :</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- show the result -->
+
+<div class="bootstrap-wrapper" *ngIf="isSubmit">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <mat-card style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);" class="mt20">
+
+                <mat-card-content class="text-center">
+                    <h1 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                        Quiz Result
+                      </h1>
+                    <mat-divider></mat-divider>
+                    <h1 class="mt10">Marks Got :  {{marksGot}}</h1>
+                    <h1>Correct Answers : {{correctAnswer}}</h1>
+                    <h1>Attempted : {{attempted}}</h1>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <div class="container text-center">
+                        <button mat-raised-button color="primary" >Print</button>
+                        <button mat-raised-button color="accent" class="ml10" routerLink="/user-dashboard/0">Home</button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

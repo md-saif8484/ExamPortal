@@ -1,0 +1,16 @@
+.truncate {
+    white-space: nowrap;      /* Prevent text from wrapping */
+    overflow: hidden;         /* Hide overflowing text */
+    text-overflow: ellipsis;  /* Add "..." at the end */
+    width: 100%;             /* Set a fixed width */
+}
+
+.header-image{
+    background-image: url("../../../../assets/quiz.png");
+    background-size: cover;
+}
+
+.btn{
+    background-color: rgb(35, 112, 122);
+    color: white;
+}

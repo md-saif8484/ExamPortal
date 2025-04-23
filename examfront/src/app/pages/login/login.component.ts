@@ -66,7 +66,7 @@ export class LoginComponent {
                   }else if(this.login.getUserRole()=="Normal")
                   {
                     console.log(this.login.getUserRole());
-                    this.router.navigate(['/user-dashboard']);
+                    this.router.navigate(['/user-dashboard/0']);
                   }else{
                     this.login.logout();
                   }

@@ -22,11 +22,4 @@ export const normalGuard: CanActivateFn = (route, state) => {
        }
     }, 200);  // Short delay to wait for localStorage updates
  });
-    // setTimeout(() => {
-    //   router.navigate(['login']); // Redirect to login
-    // }, 0);
-    
-    // console.warn("User not logged in or incorrect role, redirecting...");
-    // router.navigate(['login']);
-    // return false;
 };

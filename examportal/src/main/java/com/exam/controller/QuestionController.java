@@ -61,6 +61,7 @@ public class QuestionController {
 		this.questionService.deleteQuestion(qid);
 	}
 	
+//	get questions of quiz
 	@GetMapping("/quiz/{qid}")
 	public ResponseEntity<?> getQuestionsOfQuiz(@PathVariable("qid") Long qid)
 	{
@@ -68,7 +69,7 @@ public class QuestionController {
 //		quiz.setqId(qid);
 //		Set<Question> questionOfQuiz = this.questionService.getQuestionOfQuiz(quiz);
 //		return ResponseEntity.ok(questionOfQuiz);
-		
+		System.out.println("inside getquestionofquiz controller");
 		Quiz quiz = this.quizService.getQuiz(qid);
 		Set<Question> questions = quiz.getQuestions();
 		List list = new ArrayList(questions);
@@ -78,6 +79,16 @@ public class QuestionController {
 		}
 		Collections.shuffle(list);
 		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/quiz/all/{qid}")
+	public ResponseEntity<?> getQuestionsOfQuizAdmin(@PathVariable("qid") Long qid)
+	{
+		Quiz quiz = new Quiz();
+		quiz.setqId(qid);
+		Set<Question> questionOfQuiz = this.questionService.getQuestionOfQuiz(quiz);
+		return ResponseEntity.ok(questionOfQuiz);
+		
 	}
 	
 	
