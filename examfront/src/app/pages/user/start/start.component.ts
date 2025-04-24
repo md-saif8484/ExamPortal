@@ -8,10 +8,11 @@ import { MatCard, MatCardHeader, MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-start',
-  imports: [CommonModule,FormsModule ,MatCard,MatCardHeader,MatCardModule,MatDividerModule,MatButtonModule,RouterModule],
+  imports: [CommonModule,FormsModule ,MatCard,MatCardHeader,MatCardModule,MatDividerModule,MatButtonModule,RouterModule,MatProgressSpinnerModule],
   templateUrl: './start.component.html',
   styleUrl: './start.component.css'
 })
@@ -22,6 +23,7 @@ export class StartComponent {
   attempted=0;
   correctAnswer=0;
   isSubmit=false;
+  timer:any;
 
   constructor(private _route:ActivatedRoute,
               private _question:QuestionService,
@@ -44,7 +46,9 @@ export class StartComponent {
       this.questions.forEach((q:any)=>{
         q['givenAnswer']='';
       });
+      this.timer = this.questions.length*2*60;
       console.log("questions=>",this.questions);
+      this.startTimer();
     },(error)=>{
       console.log(error);
       Swal.fire("Error","Error in loading question!!","error");
@@ -69,24 +73,52 @@ export class StartComponent {
               confirmButtonText: "Start"
             }).then((result) => {
               if (result.isConfirmed) {
-                this.isSubmit=true;
-                this.questions.forEach((q:any)=>{
-                  if(q.givenAnswer==q.answer)
-                  {
-                    this.correctAnswer++;
-                  }
-
-                  if(q.givenAnswer.trim()!='')
-                  {
-                    this.attempted++;
-                  }
-                })
-                let marksSingle = this.questions[0].quiz.maxMarks/this.questions.length;
-                this.marksGot = this.correctAnswer*marksSingle;
-                console.log("marksgot :"+this.marksGot);
-                console.log("correct answer :" + this.correctAnswer);
-                console.log("attempted : " + this.attempted);
+                this.evalQuiz();
               }
             });
   }
+
+  startTimer()
+  {
+    let t = window.setInterval(()=>{
+      if(this.timer<=0)
+      {
+        this.evalQuiz();
+        clearInterval(t);
+      }
+      else{
+        this.timer--;
+      }
+    },1000);
+  }
+
+  evalQuiz()
+  {
+      this.isSubmit=true;
+      this.questions.forEach((q:any)=>{
+        if(q.givenAnswer==q.answer)
+        {
+          this.correctAnswer++;
+        }
+
+        if(q.givenAnswer.trim()!='')
+        {
+          this.attempted++;
+        }
+      })
+      let marksSingle = this.questions[0].quiz.maxMarks/this.questions.length;
+      this.marksGot = this.correctAnswer*marksSingle;
+      console.log("marksgot :"+this.marksGot);
+      console.log("correct answer :" + this.correctAnswer);
+      console.log("attempted : " + this.attempted);
+  }
+
+  getFormattedTime()
+  {
+    let mm = Math.floor(this.timer/60);
+    let ss = this.timer - mm*60;
+
+    return `${mm} min : ${ss} sec`;
+  }
+
 }
