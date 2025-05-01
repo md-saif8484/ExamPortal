@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Question {
@@ -27,6 +28,9 @@ public class Question {
 	
 	@ManyToOne
 	private Quiz quiz;
+	
+	@Transient
+	public String givenAnswer;
 
 	public Question() {
 		super();
@@ -104,4 +108,13 @@ public class Question {
 	public void setQuesId(Long quesId) {
 		this.quesId = quesId;
 	}
+
+	public String getGivenAnswer() {
+		return givenAnswer;
+	}
+
+	public void setGivenAnswer(String givenAnswer) {
+		this.givenAnswer = givenAnswer;
+	}
+	
 }

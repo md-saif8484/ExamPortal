@@ -39,4 +39,9 @@ export class QuestionService {
   { 
     return this.http.delete(`${baseUrl}/question/${qid}`);
   }
+
+  public eval(question:any)
+  {
+    return this.http.post(`${baseUrl}/question/eval`,question);
+  }
 }

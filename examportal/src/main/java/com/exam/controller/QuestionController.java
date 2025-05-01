@@ -1,8 +1,10 @@
 package com.exam.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,12 +74,18 @@ public class QuestionController {
 		System.out.println("inside getquestionofquiz controller");
 		Quiz quiz = this.quizService.getQuiz(qid);
 		Set<Question> questions = quiz.getQuestions();
-		List list = new ArrayList(questions);
+		List<Question> list = new ArrayList(questions);
 		if(list.size()>Integer.parseInt(quiz.getNumberOfQuestions()))
 		{
 			list = list.subList(0, Integer.parseInt(quiz.getNumberOfQuestions()+1));
 		}
+		
+		for(Question l:list)
+		{
+			l.setAnswer("");
+		}
 		Collections.shuffle(list);
+		
 		return ResponseEntity.ok(list);
 	}
 	
@@ -91,7 +99,30 @@ public class QuestionController {
 		
 	}
 	
-	
+	@PostMapping("/eval")
+	public ResponseEntity<?> evalQuiz(@RequestBody List<Question> questions)
+	{
+		System.out.println(questions);
+		int marksGot = 0;
+		int attempted = 0;
+		int correctAnswer = 0;		
+		for (Question q : questions) {
+			Question que = this.questionService.get(q.getQuesId());
+			if(q.givenAnswer != null && q.givenAnswer.equals(que.getAnswer()))
+			{
+				correctAnswer++;
+				Double singleMark = Double.parseDouble(que.getQuiz().getMaxMarks())/questions.size();
+				marksGot += singleMark;
+			}
+			if(q.givenAnswer != null)
+			{
+				attempted++;
+			}
+			
+		}
+		Map<String,Object> mp = Map.of("marksGot",marksGot, "attempted",attempted, "correctAnswer",correctAnswer);
+		return ResponseEntity.ok(mp);
+	}
 	
 	
 	

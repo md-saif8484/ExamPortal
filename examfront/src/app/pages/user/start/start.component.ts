@@ -43,9 +43,6 @@ export class StartComponent {
     this._question.getQuestionsofQuizForTest(this.qid).subscribe((data)=>{
 
       this.questions = data;
-      this.questions.forEach((q:any)=>{
-        q['givenAnswer']='';
-      });
       this.timer = this.questions.length*2*60;
       console.log("questions=>",this.questions);
       this.startTimer();
@@ -70,7 +67,7 @@ export class StartComponent {
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Start"
+              confirmButtonText: "Submit"
             }).then((result) => {
               if (result.isConfirmed) {
                 this.evalQuiz();
@@ -94,23 +91,34 @@ export class StartComponent {
 
   evalQuiz()
   {
-      this.isSubmit=true;
-      this.questions.forEach((q:any)=>{
-        if(q.givenAnswer==q.answer)
-        {
-          this.correctAnswer++;
-        }
+      
+      this._question.eval(this.questions).subscribe((data:any)=>{
+        console.log(data);
+        this.attempted = data.attempted;
+        console.log("answer: ",data.correctAnswer);
+        console.log("attem: ",data.attempted);
+        this.correctAnswer = data.correctAnswer;
+        this.marksGot = data.marksGot
+        this.isSubmit=true;
+      },(error)=>{
+        console.log(error);
+      });
+      // this.questions.forEach((q:any)=>{
+      //   if(q.givenAnswer==q.answer)
+      //   {
+      //     this.correctAnswer++;
+      //   }
 
-        if(q.givenAnswer.trim()!='')
-        {
-          this.attempted++;
-        }
-      })
-      let marksSingle = this.questions[0].quiz.maxMarks/this.questions.length;
-      this.marksGot = this.correctAnswer*marksSingle;
-      console.log("marksgot :"+this.marksGot);
-      console.log("correct answer :" + this.correctAnswer);
-      console.log("attempted : " + this.attempted);
+      //   if(q.givenAnswer.trim()!='')
+      //   {
+      //     this.attempted++;
+      //   }
+      // })
+      // let marksSingle = this.questions[0].quiz.maxMarks/this.questions.length;
+      // this.marksGot = this.correctAnswer*marksSingle;
+      // console.log("marksgot :"+this.marksGot);
+      // console.log("correct answer :" + this.correctAnswer);
+      // console.log("attempted : " + this.attempted);
   }
 
   getFormattedTime()
@@ -119,6 +127,11 @@ export class StartComponent {
     let ss = this.timer - mm*60;
 
     return `${mm} min : ${ss} sec`;
+  }
+
+  printPage()
+  {
+    window.print();
   }
 
 }

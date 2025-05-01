@@ -12,4 +12,5 @@ public interface QuestionService {
 	public Set<Question> getQuestions();
 	public Question getQuestion(Long qId);
 	public Set<Question> getQuestionOfQuiz(Quiz quiz);
+	public Question get(Long quesId);
 }
